@@ -1,0 +1,109 @@
+---
+title: "ASSIGNMENT 4"
+author: "Cindy Brinkmeyer"
+date: '2022-05-01'
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+# Markdown Basics
+
+## Favorite Foods
+
+1.  Bone-in Ribeye Steak
+2.  Baked Potatoes
+3.  Green Beans
+
+## Images
+
+![All Cases (Log Plot](CopyOfWeek6-10-all-cases-log.png)
+
+
+## Add a Quote
+
+"Creativity is Knowledge having fun". Einstein
+
+## Add an Equation
+
+$$E=mc^2$$
+
+## Add a Footnote
+
+This is a footnote[^1]
+
+[^1]: This footnote keeps disappearing!
+
+## Add Citations
+
+-   R for Everyone
+
+    [@lander2014r]
+
+-   Discovering Statistics Using R
+
+    [@field2012discovering]
+
+# Inline Code
+
+'''{r, eval=TRUE, echo=FALSE}
+paste("Hello", "World!")
+'''
+```{r}
+paste("Hello", "World!")
+```
+
+#require(ggplot2)
+```{r}
+heights_df <- read.csv("/Users/CLB/Documents/dsc520-master/data/r4ds/heights.csv")
+covid_df <- read.csv("/Users/CLB/Documents/dsc520-master/data/nytimes/covid-19-data/us-states.csv")
+california_df <- covid_df[ which(covid_df$state == "California"), ] 
+florida_df <- covid_df[ which(covid_df$state == "Florida"), ] 
+ny_df <- covid_df[ which(covid_df$state == "New York"), ] 
+
+```
+
+#heights_df <- read.csv(data/r4ds/heights.csv)
+
+#covid_df <- read.csv("data/nytimes/covid-19-data/us-states.csv")
+
+#covid_df$date <- as.Date(covid_df$date)
+
+#california_df <- covid_df[ which(covid_df$state == "California"), ] 
+#florida_df <- covid_df[ which(covid_df$state == "Florida"), ] ny_df 
+#<- covid_df[ which(covid_df\$state == "New York"), ] 
+#'''
+
+## NY Times COVID-19 Data
+
+'''{r}
+theme_set(theme_minimal())
+require(ggplot2)
+ggplot(data=florida_df, aes(x=date, group=1")) + 
+geom_line(aes(y = cases, colour = "Florida)")) + 
+geom_line(data=ny_df, aes(y = cases,colour="New York)) + geom_line(data=california_df, aes(y = cases, colour= "California")) + scale_colour_manual("", breaks = c("Florida", "New York", "California"), values = c("darkred", "darkgreen", "steelblue")) + xlab("") + ylab("Cases") + scale_y_log10()
+'''
+
+## R4DS Height vs Earnings
+
+# Tables
+
+## Knitr Table with Kable
+
+'''{r setup, echo=FALSE, 'asis'} 
+knitr::kable(head(charactors_df), caption-'One ring to rule them all.') '''
+
+## Pandoc Table
+
+'''{r}
+
+library(pander)
+
+charactors_df <-
+
+pandoc.table(charactors_df)
+
+'''
+
+
